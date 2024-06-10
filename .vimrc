@@ -1,9 +1,6 @@
 call plug#begin()
-" Colour schemes
-Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
-Plug 'sainnhe/sonokai'
-Plug 'nanotech/jellybeans.vim'
+" Colour scheme
+Plug 'cocopon/iceberg.vim'
 " Status lines
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
@@ -12,60 +9,48 @@ Plug 'preservim/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-commentary'
 Plug 'google/vim-searchindex'
-" Document compliers
+" Plug 'Yggdroot/indentLine'
+" Documents
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
-" Enable colour
+" Appearance settings
 syntax on
 if has('termguicolors')
 	set termguicolors
 endif
+set background=dark
+colorscheme iceberg
+hi Normal guibg=NONE
+hi Comment cterm=italic
+hi clear CursorLine
+hi CursorLineNr guibg=#1e2132
+hi Visual guibg=#c99a76
+hi Visual guifg=#1e2132
+hi MatchParen cterm=bold,underline
+hi CurSearch guibg=#b5bd88
+hi CurSearch guifg=#1e2132
 
-" " Unused colourscheme
-" colorscheme dracula
-" let g:dracula_colorterm = 0
-" let g:dracula_italic = 0
-" colorscheme solarized
-" set background=dark
-" highlight Normal ctermbg=None
-" colorscheme gruvbox
-" let g:gruvbox_contrast_dark='hard'
+" Testing appearance
+" hi LineNr guibg=#161821
+" hi Normal guifg=#cdd1e6
+" hi Normal guibg=#1e2132
+" hi CursorLine guibg=#161821
+" hi CursorLineNr cterm=bold
+" hi Normal guibg=#1e2132
+" hi CursorLineNr guibg=#444b71
 
-" " 4 bit color scheme
-" set t_Co=16
-" highlight LineNr ctermfg=Grey
-" highlight NonText ctermfg=DarkGrey
-" highlight StatusLine ctermfg=DarkGrey
-" highlight MatchParen cterm=underline,bold ctermbg=NONE
-" highlight Comment ctermfg=DarkGrey
-" highlight Identifier ctermfg=DarkGrey
-
-" Appearance settings
-
-" let g:sonokai_better_performance=1
-" colorscheme sonokai
-" let g:lightline={ 'colorscheme': 'sonokai', }
-
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
-let g:lightline={ 'colorscheme': 'gruvbox', }
-
-" let g:jellybeans_use_term_italics = 1
-" colorscheme jellybeans
-" let g:lightline={ 'colorscheme': 'jellybeans', }
-
+" Status lines
+let g:lightline = {'colorscheme': 'iceberg'}
 let g:tmuxline_powerline_separators=0
 let g:tmuxline_preset='minimal'
-" let g:mkdp_theme='light'
-
-" hi MatchParen cterm=underline,bold
 
 " Vim settings
 set laststatus=2 " Status line
 set nu rnu " Line numbers (relative)
 set wrap
+set cursorline
 set linebreak
 set ruler
 set autoindent
@@ -75,12 +60,19 @@ set ts=4 sw=4
 set encoding=utf-8
 set hlsearch
 set noshowmode
+set scrolloff=8
+set autoread
+set complete-=i
+set foldmethod=manual
+let g:markdown_fenced_languages = ['python', 'bash=sh']
 
-" Vimtex settings
+" Vimtex
 filetype plugin on
 let g:vimtex_view_method = 'skim'
 " let g:vimtex_syntax_enabled = 0
 
-" Filetype specific settings
+" Filetype specific
 autocmd BufNewFile,BufRead *.v,*.vs set syntax=verilog
 autocmd BufNewFile,BufRead *.pio set syntax=c
+autocmd BufNewFile,BufRead *.tex set spell
+autocmd BufNewFile,BufRead *.md set spell
