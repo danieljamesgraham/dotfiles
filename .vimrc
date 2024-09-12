@@ -8,7 +8,7 @@
  Plug 'itchyny/lightline.vim'
  Plug 'edkolev/tmuxline.vim'
  " LSP
- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+ " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
  " Quality of life
  Plug 'preservim/nerdtree'
  Plug 'christoomey/vim-tmux-navigator'
