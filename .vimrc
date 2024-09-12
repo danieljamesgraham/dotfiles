@@ -35,7 +35,7 @@ if exists("g:neovide")
 endif
 
 " Gruvbox
-let g:gruvbox_invert_selection=1
+let g:gruvbox_invert_selection=0
 let g:gruvbox_italic=1
 if !has('nvim')
 	let g:gruvbox_underline=0
@@ -102,6 +102,7 @@ let g:vimtex_matchparen_enabled = 0
 
 " Markdown
 let g:markdown_fenced_languages = ['python', 'bash=sh']
+let g:vmt_list_item_char="-"
 
 " VimWiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
