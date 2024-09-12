@@ -5,6 +5,9 @@ export CLICOLOR=1
 alias grep='grep --color=auto'
 alias gotowork='cd ~/' 
 
+# Vi mode
+bindkey -v
+
 # Pure prompt
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit

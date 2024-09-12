@@ -35,7 +35,7 @@ if exists("g:neovide")
 endif
 
 " Gruvbox
-let g:gruvbox_invert_selection=0
+let g:gruvbox_invert_selection=1
 let g:gruvbox_italic=1
 if !has('nvim')
 	let g:gruvbox_underline=0
