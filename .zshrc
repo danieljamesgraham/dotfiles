@@ -29,6 +29,7 @@ else
 fi
 
 # Dotfiles
+alias dotfiles='cd "$DOTFILES"'
 alias zshrc="vi $HOME/.zshrc"
 alias vimrc="vi $HOME/.vimrc"
 alias tmux.conf="vi $HOME/.tmux.conf"
@@ -54,3 +55,10 @@ zstyle ':prompt:pure:git:branch' color 8 # bright black
 zstyle ':prompt:pure:git:dirty' color 5 # magenta
 
 source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+
+### SOURCE LOCAL ZSHRC
+
+if [ -f "$HOME/.zshrc.local" ]; then
+    source "$HOME/.zshrc.local"
+fi

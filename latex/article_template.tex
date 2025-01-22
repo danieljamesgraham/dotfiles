@@ -1,27 +1,24 @@
 \documentclass[11pt, a4paper, twocolumn]{article}
-
 % Page layout
 \usepackage[a4paper, margin=20mm]{geometry}
-
 % Line spacing
 \usepackage{setspace}
 \singlespacing
-
 % Paragraph breaks
 \usepackage[parfill]{parskip}
-
 % Font
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-
-\usepackage{nth}
+% Maths
+\usepackage{amsmath}
 \usepackage{siunitx}
-
+\usepackage{nth}
+% Figures
 \usepackage{graphicx}
 \graphicspath{ {./figures} }
 \usepackage[font=footnotesizejustification=centering]{caption}
-
+\usepackage{subcaption}
 % Bibliography and links
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true, linkcolor=RoyalBlue, citecolor=Red, urlcolor=RoyalBlue]{hyperref}
@@ -29,7 +26,7 @@
 \renewcommand*{\bibfont}{\small}
 % \addbibresource{}
 
-% Solarized colour scheme for editing
+% Solarized colours for editing
 \definecolor{SolarizedFG}{RGB}{23, 53, 64}
 \color{SolarizedFG}
 \definecolor{SolarizedBG}{RGB}{253, 246, 227}
@@ -42,6 +39,10 @@
 
 \begin{document}
 
+\maketitle
 
+
+
+% \printbibliography[title=References]
 
 \end{document}

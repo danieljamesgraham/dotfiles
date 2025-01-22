@@ -99,7 +99,16 @@ function! ProseConfig()
 	setlocal smoothscroll  " Single line scrolling
 	setlocal display=lastline  " Don't hide lines cut off by window
 endfunction
-autocmd FileType markdown,tex call ProseConfig()
+
+" Tex files
+function! LatexConfig()
+	nnoremap <buffer> \ia :read $DOTFILES/latex/article_template.tex<CR>kdd/maketitle<CR>:noh<CR>2j
+	nnoremap <buffer> \ip :read $DOTFILES/latex/presentation_template.tex<CR>kdd/frame}{}<CR>:noh<CR>j
+endfunction
+augroup LatexAutocmds
+	autocmd!
+	autocmd FileType tex call LatexConfig() | call ProseConfig()
+augroup END
 
 " Markdown files
 function! MarkdownConfig()
@@ -124,7 +133,10 @@ function! MarkdownConfig()
 	syn region markdownMath start="\\\@<!\$" end="\$" skip="\\\$" contains=@tex keepend
 	syn region markdownMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex keepend
 endfunction
-autocmd FileType markdown call MarkdownConfig()
+augroup MarkdownAutocmds
+	autocmd!
+	autocmd FileType markdown call MarkdownConfig() | call ProseConfig()
+augroup END
 
 " Fix incorrect syntax highlighting
 autocmd BufNewFile,BufRead *.v,*.vs set syntax=verilog
