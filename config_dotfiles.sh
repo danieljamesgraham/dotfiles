@@ -29,7 +29,7 @@ sed_i_univ() {
 # Arguments:
 # 	$1 - Cron expression
 config_cron() {
-	cron_job="$1 git -C $dotfiles_dir pull  # Pull dotfiles every day"
+	cron_job="$1 git -C $dotfiles_dir pull  # Pull 'danieljamesgraham/dotfiles' every day"
 	crontab_contents=$(crontab -l 2>/dev/null || echo "")
 	config_cron_0() { echo -e "\033[32mCrontab updated.\033[0m"; }
 	config_cron_1() { echo -e "\033[31mFailed to update crontab!\033[0m"; ((error_count++)); }
