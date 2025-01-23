@@ -15,8 +15,8 @@ distro=$1
 if [ "$distro" == "mac" ]; then
 	echo -e "\n\033[1m--- UPDATING PACKAGES ---\033[0m"
 	brew update && brew upgrade
-	echo -e "\n\033[1m--- INSTALLING NEOVIM ---\033[0m"
-	brew install neovim
+	echo -e "\n\033[1m--- INSTALLING (NEO)VIM ---\033[0m"
+	brew install vim neovim
 	echo -e "\n\033[1m--- INSTALLING TMUX ---\033[0m"
 	brew install tmux
 elif [ "$distro" == "deb" ]; then

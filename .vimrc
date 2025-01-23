@@ -38,7 +38,7 @@ else
 	set t_Co=16  " 16 colour vim
 endif
 let g:solarized_termcolors = 16  " 16 colour solarized
-colorscheme solarized8
+silent! colorscheme solarized8
 hi clear Cursearch | hi link CurSearch IncSearch  " Cursor search match
 
 " Lightline
@@ -55,6 +55,7 @@ let g:vimtex_fold_enabled=0  " Disabling folding (MIGHT CHANGE ¯\_(ツ)_/¯)
 
 " Bullets
 let g:bullets_outline_levels = ['num', 'abc', 'rom', 'std*']
+let g:bullets_enabled_file_types = ['markdown', 'text', 'tex']
 
 
 """ (N)VIM CONFIG
@@ -103,7 +104,7 @@ endfunction
 " Tex files
 function! LatexConfig()
 	nnoremap <buffer> \ia :read $DOTFILES/latex/article_template.tex<CR>kdd/maketitle<CR>:noh<CR>2j
-	nnoremap <buffer> \ip :read $DOTFILES/latex/presentation_template.tex<CR>kdd/frame}{}<CR>:noh<CR>j
+	nnoremap <buffer> \ip :read $DOTFILES/latex/presentation_template.tex<CR>kdd/{frame}{}<CR>:noh<CR>j
 endfunction
 augroup LatexAutocmds
 	autocmd!
