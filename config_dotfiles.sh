@@ -62,7 +62,7 @@ config_env_var() {
 	export_dotfiles="export DOTFILES=$dotfiles_dir"
 	config_env_var_0() { echo -e "\033[32mSet DOTFILES environment variable.\033[0m"; }
 	config_env_var_1() { echo -e "\033[31mFailed to set DOTFILES environment variable!\033[0m"; ((error_count++)); }
-	echo_export_dotfiles() { echo "$1" >> "$zshrc_local_path" && config_env_var0 || config_env_var_1; }
+	echo_export_dotfiles() { echo "$1" >> "$zshrc_local_path" && config_env_var_0 || config_env_var_1; }
 	if [ -f "$zshrc_local_path" ]; then
 		if grep -q "$export_dotfiles" "$zshrc_local_path"; then
 			echo "DOTFILES environment variable already set."
