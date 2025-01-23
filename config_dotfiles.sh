@@ -29,21 +29,27 @@ sed_i_univ() {
 # Arguments:
 # 	$1 - Cron expression
 config_cron() {
-	cron_job="$1 git -C $dotfiles_dir pull"
+	cron_job="$1 git -C $dotfiles_dir pull  # Pull dotfiles every day"
 	crontab_contents=$(crontab -l 2>/dev/null || echo "")
 	config_cron_0() { echo -e "\033[32mCrontab updated.\033[0m"; }
 	config_cron_1() { echo -e "\033[31mFailed to update crontab!\033[0m"; ((error_count++)); }
-	update_crontab() { echo "$cron_job" | crontab - && config_cron_0 || config_cron_1; }
+	update_crontab() {
+		echo "$crontab_contents" > "temp_crontab" 
+		sed_i_univ "/Pull dotfiles every day/d" "temp_crontab"
+		echo "$cron_job" >> "temp_crontab"
+		crontab "temp_crontab" 
+		rm "temp_crontab"
+	}
 	if echo "$crontab_contents" | grep -Fq "$cron_job"; then
 		echo "Pull dotfiles cron job already created."
-	elif echo "$crontab_contents" | grep -Fq "$dotfiles_dir"; then  # Replace incorrect crontab entry
-		echo "$crontab_contents" > temp_crontab && sed_i_univ "/dotfiles pull/d" "temp_crontab" && crontab temp_crontab && rm temp_crontab && update_crontab || config_cron_1
+	elif echo "$crontab_contents" | grep -Fq "Pull dotfiles every day"; then  # Replace incorrect crontab entry
+		update_crontab && config_cron_0 || config_cron_1
 	else
 		while true; do
 		read -p "Create pull dotfiles cron job? (y/n): " response
 		case "$response" in
 			[yY])
-				update_crontab
+				update_crontab && config_cron_0 || config_cron_1
 				break;;
 			[nN])
 				echo -e "Crontab NOT updated."
