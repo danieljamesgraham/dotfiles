@@ -8,11 +8,7 @@ Plug 'lervag/vimtex'  " LaTex
 Plug 'preservim/nerdtree'  " Tree explorer
 Plug 'itchyny/lightline.vim'  " Status line
 Plug 'edkolev/tmuxline.vim'  " Status line (tmux)
-if has('nvim')
-	Plug 'lifepillar/vim-solarized8', { 'branch': 'neovim' }  " Nvim solarized
-else
-	Plug 'lifepillar/vim-solarized8'  " Vim solarized
-endif
+Plug 'gruvbox-community/gruvbox'  " Gruvbox colourscheme
 call plug#end()
 
 " MIGHT REINSTALL ¯\_(ツ)_/¯
@@ -29,20 +25,50 @@ call plug#end()
 
 filetype plugin on  " Enable filetype-based plugin scripts
 
-" Solarized8
-syntax on  " Enable syntax highlighting
-set background=light  " Light mode
-if has('nvim')
-	let g:solarized_t_Co=16  " 16 colour neovim
-else
-	set t_Co=16  " 16 colour vim
+" Enable colours
+syntax on
+if has('termguicolors')
+	set termguicolors
 endif
-let g:solarized_termcolors = 16  " 16 colour solarized
-silent! colorscheme solarized8
-hi clear Cursearch | hi link CurSearch IncSearch  " Cursor search match
+set background=dark
+
+" Gruvbox
+let g:gruvbox_invert_selection=1
+let g:gruvbox_italic=1
+if !has('nvim')
+	let g:gruvbox_underline=0
+	let g:gruvbox_undercurl=0
+	let g:gruvbox_guisp_fallback='bg'
+endif
+colorscheme gruvbox
+
+" Current line number
+hi clear CursorLine
+hi clear CursorLineNr
+hi CursorLineNr guifg=#ebdbb2
+
+" Search matches
+hi CurSearch guibg=#b8bb26
+hi CurSearch guifg=#282828
+
+" TODOs
+hi! link Todo GruvboxRed
+
+" LaTeX
+hi link texCMD GruvboxGreen
+hi link texPartArgTitle GruvboxRed
+
+" Verilog
+hi link verilogOperator GruvboxBlue
+hi link verilogConditional GruvboxYellow
+hi link verilogLabel GruvboxOrange
 
 " Lightline
-let g:lightline = {'colorscheme':'solarized'}
+let g:lightline = {'colorscheme':'gruvbox'}
+let lightline#colorscheme#gruvbox#palette['tabline']['tabsel'] = [lightline#colorscheme#gruvbox#palette['normal']['right'][0]]
+let lightline#colorscheme#gruvbox#palette['tabline']['left'] = [lightline#colorscheme#gruvbox#palette['normal']['right'][1]]
+let lightline#colorscheme#gruvbox#palette['tabline']['middle'] = lightline#colorscheme#gruvbox#palette['normal']['middle']
+let lightline#colorscheme#gruvbox#palette['tabline']['right'] = lightline#colorscheme#gruvbox#palette['normal']['middle']
 
 " Tmuxline
 let g:tmuxline_powerline_separators=0
@@ -165,49 +191,23 @@ endif
 
 """ DEPRECATED
 
-" Plug 'gruvbox-community/gruvbox'
-
-" " Enable colours
-" syntax on
-" if has('termguicolors')
-" 	set termguicolors
+" if has('nvim')
+" 	Plug 'lifepillar/vim-solarized8', { 'branch': 'neovim' }  " Nvim solarized
+" else
+" 	Plug 'lifepillar/vim-solarized8'  " Vim solarized
 " endif
-" set background=dark
 
-" " Gruvbox
-" let g:gruvbox_invert_selection=1
-" let g:gruvbox_italic=1
-" if !has('nvim')
-" 	let g:gruvbox_underline=0
-" 	let g:gruvbox_undercurl=0
-" 	let g:gruvbox_guisp_fallback='bg'
+" " Solarized8
+" syntax on  " Enable syntax highlighting
+" set background=light  " Light mode
+" if has('nvim')
+" 	let g:solarized_t_Co=16  " 16 colour neovim
+" else
+" 	set t_Co=16  " 16 colour vim
 " endif
-" colorscheme gruvbox
-
-" " Current line number
-" hi clear CursorLine
-" hi clear CursorLineNr
-" hi CursorLineNr guifg=#ebdbb2
-
-" " Search matches
-" hi CurSearch guibg=#b8bb26
-" hi CurSearch guifg=#282828
-
-" " TODOs
-" hi! link Todo GruvboxRed
-
-" " LaTeX
-" hi link texCMD GruvboxGreen
-" hi link texPartArgTitle GruvboxRed
-
-" " Verilog
-" hi link verilogOperator GruvboxBlue
-" hi link verilogConditional GruvboxYellow
-" hi link verilogLabel GruvboxOrange
+" let g:solarized_termcolors = 16  " 16 colour solarized
+" silent! colorscheme solarized8
+" hi clear Cursearch | hi link CurSearch IncSearch  " Cursor search match
 
 " " Lightline
-" let g:lightline = {'colorscheme':'gruvbox'}
-" let lightline#colorscheme#gruvbox#palette['tabline']['tabsel'] = [lightline#colorscheme#gruvbox#palette['normal']['right'][0]]
-" let lightline#colorscheme#gruvbox#palette['tabline']['left'] = [lightline#colorscheme#gruvbox#palette['normal']['right'][1]]
-" let lightline#colorscheme#gruvbox#palette['tabline']['middle'] = lightline#colorscheme#gruvbox#palette['normal']['middle']
-" let lightline#colorscheme#gruvbox#palette['tabline']['right'] = lightline#colorscheme#gruvbox#palette['normal']['middle']
+" let g:lightline = {'colorscheme':'solarized'}

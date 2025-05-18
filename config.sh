@@ -132,7 +132,7 @@ curl_vimplug() {
 	if [ "$vim_or_nvim" = "vim" ]; then
 		vimplug_path="$HOME/.vim/autoload/plug.vim"
 	elif [ "$vim_or_nvim" = "nvim" ]; then
-		vimplug_path="$HOME/.config/nvim/site/autoload/plug.vim"
+		vimplug_path="$HOME/.local/share/nvim/site/autoload/plug.vim"
 	fi
 	if [ -f "$vimplug_path" ]; then
 		echo "vim-plug already installed for $vim_or_nvim."
