@@ -1,8 +1,11 @@
+export TERM=xterm-256color
+
 ### ALIASES
 
 # General
 alias :q='exit'
 alias grep='grep --color=auto'
+alias diff='diff --color -u'
 
 # Onedrive
 onedrive_path="$HOME/OneDrive"
