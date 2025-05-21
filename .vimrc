@@ -1,7 +1,5 @@
 call plug#begin()
-Plug 'tpope/vim-commentary'  " Comments (gc)
-Plug 'christoomey/vim-titlecase'  " Titlecase (gz)
-Plug 'tpope/vim-surround'  " Parentheses, brackets, quotes (cs,ds,ys)
+Plug 'tpope/vim-commentary'  " Comments (gc) Plug 'christoomey/vim-titlecase'  " Titlecase (gz) Plug 'tpope/vim-surround'  " Parentheses, brackets, quotes (cs,ds,ys)
 Plug 'christoomey/vim-tmux-navigator'  " Tmux pane switching
 Plug 'bullets-vim/bullets.vim'  " Lists
 Plug 'lervag/vimtex'  " LaTex
@@ -70,9 +68,16 @@ let g:tmuxline_powerline_separators=0
 let g:tmuxline_preset='minimal'
 
 " Vimtex
-let g:vimtex_view_method = 'skim'  " Use Skim as LaTex .pdf viewer
+let g:vimtex_view_method = 'zathura'  " Use Skim as LaTex .pdf viewer
 let g:vimtex_matchparen_enabled=0  " Environment detection as reducing performance
-let g:vimtex_fold_enabled=0  " Disabling folding (MIGHT CHANGE ¯\_(ツ)_/¯)
+let g:vimtex_fold_enabled=1  " Disabling folding (MIGHT CHANGE ¯\_(ツ)_/¯)
+let g:vimtex_view_forward_search_on_start=0  " Disable forward search on start
+let g:vimtex_quickfix_autoclose_after_keystrokes=2
+let g:vimtex_quickfix_ignore_filters = [
+			\ 'float specifier changed',
+			\ 'Draft mode on',
+			\ '\angstrom has been deprecated',
+			\]
 
 " Bullets
 let g:bullets_outline_levels = ['num', 'abc', 'rom', 'std*']
@@ -91,6 +96,7 @@ set ruler  " Show line and column number (not needed with lightline)
 " Behaviour
 set mouse=a  " Enable mouse for all modes
 set clipboard=unnamed  " Copy and paste to system clipboard without '*'
+set clipboard+=unnamedplus
 set nowrap  " Don't wrap text
 set hlsearch  " Highlight all search matches
 set shortmess-=S  " Display number of search matches

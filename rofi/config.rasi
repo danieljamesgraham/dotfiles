@@ -1,0 +1,8 @@
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+
+configuration {
+	terminal: "kitty";
+	icon-theme: "Adwaita";
+	show-icons: true;
+	sidebar-mode: true;
+}
