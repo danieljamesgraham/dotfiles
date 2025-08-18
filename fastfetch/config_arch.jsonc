@@ -21,13 +21,13 @@
     {
         "type": "host",
         "keyColor": "title",
-		"format": "{#title;1}{family}{#} "
+		"format": "{#title;1}{name}{#} "
     },
     {
         "type": "cpu",
         "keyColor": "title",
 		"temp": true,
-		"format": "Intel Core i5-8350U ({cores-logical}) @ {freq-max} ({temperature})"
+		"format": "Intel Core i7-1185G7 ({cores-logical}) @ {freq-max} ({temperature})"
 		// "format": "{name} ({cores-logical}) @ {freq-max} ({temperature})"
     },
     {

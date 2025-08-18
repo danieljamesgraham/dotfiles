@@ -1,11 +1,14 @@
 call plug#begin()
-Plug 'tpope/vim-commentary'  " Comments (gc) Plug 'christoomey/vim-titlecase'  " Titlecase (gz) Plug 'tpope/vim-surround'  " Parentheses, brackets, quotes (cs,ds,ys)
+Plug 'tpope/vim-commentary'  " Comments (gc)
+Plug 'christoomey/vim-titlecase'  " Titlecase (gz)
+Plug 'tpope/vim-surround'  " Parentheses, brackets, quotes (cs,ds,ys)
 Plug 'christoomey/vim-tmux-navigator'  " Tmux pane switching
 Plug 'bullets-vim/bullets.vim'  " Lists
 Plug 'lervag/vimtex'  " LaTex
 Plug 'preservim/nerdtree'  " Tree explorer
 Plug 'itchyny/lightline.vim'  " Status line
 Plug 'edkolev/tmuxline.vim'  " Status line (tmux)
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'gruvbox-community/gruvbox'  " Gruvbox colourscheme
 call plug#end()
 
@@ -13,7 +16,6 @@ call plug#end()
 " Plug 'godlygeek/tabular'
 " Plug 'preservim/vim-markdown'
 " Plug 'mzlogin/vim-markdown-toc'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'vimwiki/vimwiki'
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -45,7 +47,7 @@ hi CurSearch guibg=#b8bb26
 hi CurSearch guifg=#282828
 
 " TODOs
-hi! link Todo GruvboxRed
+hi! link Todo GruvboxRedBold
 
 " LaTeX
 hi link texCMD GruvboxGreen
@@ -77,7 +79,12 @@ let g:vimtex_quickfix_ignore_filters = [
 			\ 'float specifier changed',
 			\ 'Draft mode on',
 			\ '\angstrom has been deprecated',
+                        \ 'Overfull \\hbox',
 			\]
+let g:vimtex_compiler_latexmk = {
+    \ 'aux_dir' : {_ -> 'latexmk'},
+    \ 'options' : ['-shell-escape'],
+    \}
 
 " Bullets
 let g:bullets_outline_levels = ['num', 'abc', 'rom', 'std*']
@@ -95,7 +102,7 @@ set ruler  " Show line and column number (not needed with lightline)
 
 " Behaviour
 set mouse=a  " Enable mouse for all modes
-set clipboard=unnamed  " Copy and paste to system clipboard without '*'
+" set clipboard=unnamed  " Copy and paste to system clipboard without '*'
 set clipboard+=unnamedplus
 set nowrap  " Don't wrap text
 set hlsearch  " Highlight all search matches
@@ -111,7 +118,10 @@ set nohidden  " Do not hide buffers in background
 
 " Common sense
 set encoding=utf-8  " UTF-8 text encoding
-set ts=4 sw=4  " 4 space tabs
+" set ts=4 sw=4  " 4 space tabs
+set shiftwidth=4 smarttab
+set expandtab
+set tabstop=8 softtabstop=0
 
 " Files containing prose
 function! ProseConfig()

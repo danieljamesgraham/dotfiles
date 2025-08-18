@@ -1,232 +1,208 @@
-// -*- mode: jsonc -*-
+/*                       __
+   _      ______ ___  __/ /_  ____ ______
+  | | /| / / __ `/ / / / __ \/ __ `/ ___/
+  | |/ |/ / /_/ / /_/ / /_/ / /_/ / /
+  |__/|__/\__,_/\__, /_.___/\__,_/_/
+               /____/
+                      _____
+    _________  ____  / __(_)___ _
+   / ___/ __ \/ __ \/ /_/ / __ `/
+  / /__/ /_/ / / / / __/ / /_/ /
+  \___/\____/_/ /_/_/ /_/\__, /
+                        /____/
+*/
+
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 24, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    // "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
+    // "width": 1900,
+    "height": 24,
+
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad"
-        // "custom/media"
+        "hyprland/workspaces"
+        // "cava"
     ],
-    "modules-center": [
-        // "sway/window",
-        "clock"
-    ],
+
     "modules-right": [
-		"custom/waybar-mpris",
-        // "cpu",
-        // "memory",
-        // "temperature",
-        "tray",
-        // "mpd",
-        // "idle_inhibitor",
-        "pulseaudio",
+        "custom/dunst",
         "backlight",
-        // "power-profiles-daemon",
-        // "keyboard-state",
-        // "sway/language",
-        // "network",
-		// "bluetooth",
-        "battery"
-        // "battery#bat2",
-		// "calendar"
-        // "custom/power"
+        "pulseaudio",
+        "bluetooth",
+        // "custom/vpn",
+        "network",
+        "battery",
+        "clock#date",
+        "clock#time"
     ],
-    // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
-    "sway/mode": {
-        // "format": "<span style=\"text-transform:uppercase\">{}</span>"
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "show-special": true,
+        "on-click": "activate",
+        "move-to-monitor": true
     },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
+
+    "cava": {
+        "actions": {
+                   "on-click": "mode",
+                   "on-click-right": "mode"
+        },
+
+        "bars": 16,
+        "stereo": false,
+        "reverse": false,
+        "bar_delimiter": 32,
+        "format-icons": [" ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+
+        "framerate": 30,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "autosens": 0,
+        "sensitivity": 10,
+        "noise_reduction": 0.77,
+        "monstercat": false,
+        "waves": false,
+        "hide_on_silence": true,
+        "input_delay": 2,
+        "method": "pulse",
+        "source": "auto"
+    },
+
+    "custom/dunst": {
+        "on-click": "dunstctl set-paused toggle",
+        "on-click-right": "dunstctl set-paused toggle",
+
+        "exec": "~/.config/waybar/scripts/dunst_waybar.sh",
+        "format": "{}",
+        "return-type": "json",
+
         "tooltip": true,
-        "tooltip-format": "{app}: {title}"
+        "restart-interval": 1
     },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 20,
-		"show-passive-items": true,
-		// "reverse-direction": true
-    },
-	"calendar": {
-		"format": "  {:%d %B %Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-	},
-    "clock": {
-		// "format": "  {:%H:%M}",
-		"format": "{:%I:%M %p — %a %d %B}",
-        // "tooltip-format": "{:%a %d %B %Y}"
-		"tooltip": false
-    },
-    "cpu": {
-        "format": " {usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": " {}%"
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
-    },
-    "backlight": {
-        "device": "acpi_video1",
-        "format": "{icon} {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
-		"on-click": "nwg-displays",
-		"tooltip-format": "Backlight"
-    },
-	"bluetooth": {
-		"format": "    ",
-		"on-click": "bzmenu -l rofi"
-	},
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-full": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": " {capacity}%",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["󰂎", "󰁻", "󰁾", "󰂀", "󰁹"],
-		"on-click": "tlpui"
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        // "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-wifi": "    {essid}",
-        "format-ethernet": "  Ethernet",
-        "tooltip-format": "{ifname}: {gwaddr}",
-        "format-linked": "  (No IP)",
-        "format-disconnected": "⚠ Disconnected",
-		"on-click": "kitty nmtui"
-		// "on-click": "iwmenu -l rofi"
-    },
+
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%",
-        // "format": "{icon} {volume}",
-        // "format-bluetooth": "{icon} ",
-        // "format-bluetooth": "{icon} {volume}",
-        // "format-bluetooth-muted": "󰖁 {icon} ",
-        // "format-bluetooth-muted": "󰖁 {icon}",
-        "format-muted": " ",
+        "on-click": "pavucontrol",
+        "on-click-right": "pavucontrol",
+        // "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "reverse-scrolling": true,
+
+        // "format": "{icon} {volume:02}",
+        "format": "{icon} {volume}",
+        "format-muted": "<span color='#665c54'>{icon}</span>",
+
         "format-icons": {
             "headphone": "",
             "hands-free": "",
             "headset": "",
             "phone": "",
             "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+            "default": "󰓃"
+        }
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+
+    "backlight": {
+        "on-click": "nwg-displays",
+        "on-click-right": "nwg-displays",
+        "reverse-scrolling": true,
+
+        // "format": "󰌢 {percent:02}",
+        // "format": "󰃞 {percent:02}",
+        "format": "󰃞 {percent}",
+        "device": "acpi_video1",
+
+        "tooltip-format": "Display"
     },
-    "custom/power": {
-        "format" : "   ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"lock": "swaylock",
-			"suspend": "systemctl suspend",
-			"shutdown": "shutdown now",
-			"reboot": "reboot"
-		}
-	},
-    "custom/waybar-mpris": {
-		"return-type": "json",
-		"exec": "waybar-mpris --autofocus --pause '' --play '' --order 'SYMBOL'",
-		"on-click": "waybar-mpris --send toggle",
-		// This option will switch between players on right click.
-		"on-click-right": "waybar-mpris --send player-next",
-		// The options below will switch the selected player on scroll
-			// "on-scroll-up": "waybar-mpris --send player-next",
-			// "on-scroll-down": "waybar-mpris --send player-prev",
-		// The options below will go to next/previous track on scroll
-			// "on-scroll-up": "waybar-mpris --send next",
-			// "on-scroll-down": "waybar-mpris --send prev",
-		"escape": true
-	}
+
+    "bluetooth": {
+        "on-click": "blueman-manager",
+        "on-click-right": "blueman-manager",
+        // "on-click-right": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on",
+
+        "format-on": "<span color='#665c54'>󰂯</span>",
+        "format-connected": "󰂯 {device_alias}",
+        "format-disabled": "<span color='#665c54'>󰂲</span>",
+        "format-off": "<span color='#665c54'>󰂲</span>",
+
+        "tooltip-format": "{num_connections} connection(s)",
+        "tooltip-format-on": "Bluetooth disconnected",
+        "tooltip-format-disabled": "Bluetooth disabled",
+        "tooltip-format-off": "Bluetooth disabled"
+
+    },
+
+    // "custom/vpn": {
+    //     "on-click": "~/.config/waybar/scripts/vpn_waybar.sh toggle",
+    //     "on-click-right": "~/.config/waybar/scripts/vpn_waybar.sh toggle",
+
+    //     "exec": "~/.config/waybar/scripts/vpn_waybar.sh status",
+    //     "format": "{}",
+    //     "return-type": "json",
+
+    //     "tooltip": true,
+    //     "restart-interval": 1
+    // },
+
+    "network": {
+        "on-click": "kitty --title nmtui -e nmtui-connect",
+        "on-click-right": "kitty --title nmtui -e nmtui-connect",
+        // "on-click-right": "nmcli radio wifi | grep -q enabled && nmcli radio wifi off || nmcli radio wifi on",
+
+        "format-wifi": "{icon} {essid}",
+        // "format-ethernet": "󰈀 Ethernet",
+        "format-ethernet": "󰈀 Wired",
+        "format-disconnected": "<span color='#665c54'>󰤯</span>",
+        "format-disabled": "<span color='#665c54'>󰤮</span>",
+        "max-length": 25,
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+
+        "tooltip-format": "{ipaddr}",
+        "tooltip-format-disconnected": "Network disconnected",
+        "tooltip-format-disabled": "Network disabled"
+
+    },
+
+    "battery": {
+        "on-click": "kitty --title btop -e btop",
+        "on-click-right": "kitty --title btop -e btop",
+
+        "format": "{icon} {capacity}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-charging": "󱐋 {capacity}",
+        // "format-plugged": " {capacity}",
+        "format-plugged": "",
+        "interval": 15,
+
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    },
+
+    "clock#date": {
+        "on-click": "kitty --title cal -e sh -c 'cal --year --color; read -n1 -s'",
+        "on-click-right": "kitty --title cal -e sh -c 'cal --year --color; read -n1 -s'",
+
+        "format": "{:%a %d %b}",
+        "tooltip-format": "{calendar}",
+
+        "calendar": {
+            "format": {
+                "months": "<b>{}</b>",
+                "today": "<span color='#689d6a'><b>{}</b></span>"
+            }
+        }
+    },
+
+    "clock#time": {
+        "on-click": "kitty --title tty-clock -e tty-clock -c -C 6 -B -t",
+        "on-click-right": "kitty --title tty-clock -e tty-clock -c -C 6 -B -t",
+
+        "format": "{:%H:%M}",
+        "tooltip-format": " London\n{tz_list} Abu Dhabi",
+
+        "timezones": [
+            "America/New_York",
+            "Europe/London",
+            "Asia/Dubai"
+        ]
+    }
 }
