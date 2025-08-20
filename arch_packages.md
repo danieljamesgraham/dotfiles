@@ -51,3 +51,12 @@ ranger
 pqiv
 zathura
 zathura-pdf-mupdf
+
+jellyfin-media-player (aur)
+
+ttf-dejavu
+ttf-dejavu-nerd (aur)
+noto-fonts-emoji
+
+hyprpicker
+transmission
