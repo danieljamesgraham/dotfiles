@@ -19,10 +19,10 @@ link_dot() {
     local SRC_NAME="$1"
     local DEST_NAME="$2"
 
-    local SRC_PATH="$DOTFILES_DIR/$DOT_NAME"
+    local SRC_PATH="$DOTFILES_DIR/$SRC_NAME"
     local DEST_PATH="$HOME/.$DEST_NAME"
 
-    if [ -f "$DEST_PATH" ]; then
+    if [ "$DEST_PATH" ]; then
         rm "$DEST_PATH"
     fi
     
