@@ -1,0 +1,40 @@
+#!/bin/bash
+
+DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+link_dir() {
+    local DOT_NAME="$1"
+
+    local SRC_DIR="$DOTFILES_DIR/$DOT_NAME"
+    local DEST_DIR="$HOME/.config/$DOT_NAME"
+
+    if [ -d "$DEST_DIR" ]; then
+        rm -rf "$DEST_DIR"
+    fi
+    
+    ln -s "$SRC_DIR" "$DEST_DIR"
+}
+
+link_dot() {
+    local SRC_NAME="$1"
+    local DEST_NAME="$2"
+
+    local SRC_PATH="$DOTFILES_DIR/$DOT_NAME"
+    local DEST_PATH="$HOME/.$DEST_NAME"
+
+    if [ -f "$DEST_PATH" ]; then
+        mv "$DEST_PATH" "$DEST_PATH.old"
+    fi
+    
+    ln -s "$SRC_PATH" "$DEST_PATH"
+}
+
+
+link_dir btop
+link_dir fastfetch
+link_dir nvim
+link_dir ranger
+
+link_dot tmux/tmux.conf tmux.conf
+link_dot nvim/init.vim vimrc
+link_dot zsh/zshrc zshrc
