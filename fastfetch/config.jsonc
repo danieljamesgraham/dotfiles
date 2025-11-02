@@ -1,60 +1,50 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-      "source": "arch_small",
+      "type": "small",
       "padding": {
-		  "left": 1,
           "right": 2
       },
 	  "position": "left"
   },
   "display": {
-      "key": {
-          "type": "icon"
-      },
-	  "separator": " ",
+	  "separator": ": ",
 	  "temp": {
 		  "ndigits": 0
 	  }
   },
   "modules": [
     {
+        "type": "title"
+    },
+    {
+        "type": "separator"
+    },
+    {
         "type": "host",
-        "keyColor": "title",
-		"format": "{#title;1}{name}{#} "
+        "format": "{vendor} {name} "
     },
     {
         "type": "cpu",
-        "keyColor": "title",
-		"temp": true,
-		"format": "Intel Core i7-1185G7 ({cores-logical}) @ {freq-max} ({temperature})"
-		// "format": "{name} ({cores-logical}) @ {freq-max} ({temperature})"
+        "temp": true,
+        "format": "{name} ({cores-logical}) @ {freq-max} ({temperature})"
     },
     {
-        "type": "memory",
-        "keyColor": "title"
+        "type": "memory"
     },
     {
         "type": "disk",
-        "keyColor": "title",
         "folders": "/",
-		"format": "'{mountpoint}' ({filesystem}) {size-used} / {size-total} ({size-percentage})"
+        "format": "{filesystem} {size-used} / {size-total} ({size-percentage})"
+    },
+    {
+        "type": "os"
     },
     {
         "type": "kernel",
-        "keyColor": "title"
     },
     {
-        "type": "os",
-        "keyColor": "title"
-    },
-    {
-        "type": "wm",
-        "keyColor": "title"
-    },
-    {
-        "type": "uptime",
-        "keyColor": "title"
+        "type": "uptime"
     }
   ]
 }
