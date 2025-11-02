@@ -23,7 +23,7 @@ link_dot() {
     local DEST_PATH="$HOME/.$DEST_NAME"
 
     if [ -f "$DEST_PATH" ]; then
-        mv "$DEST_PATH" "$DEST_PATH.old"
+        rm "$DEST_PATH"
     fi
     
     ln -s "$SRC_PATH" "$DEST_PATH"
